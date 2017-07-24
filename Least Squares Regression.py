@@ -25,7 +25,8 @@ def hypothesis_calculator(data):
     global weight_vector
     print ("calculating with weight_vector: ",weight_vector)
     hyp_list = [];
-    column_list = ["area",'beds','intercept']
+    column_list = data.columns.tolist()
+    column_list.remove("class")
     #column_list = data.columns.tolist().remove("class")
     actual_values = data["class"].values.tolist()
     for index,rows in data.iterrows():
@@ -40,8 +41,9 @@ def hypothesis_calculator(data):
 def fit(data):
     global weight_vector
     global tolerance
-    column_list = ["area",'beds','intercept']
-    #column_list = data.columns.tolist()
+    #column_list = ["area",'beds','intercept']
+    column_list = data.columns.tolist()
+    column_list.remove("class")
     while tolerance > accepted_tolerance:
         temp_weight_vector = []
         weighted_error = 0
@@ -88,7 +90,7 @@ if __name__ == '__main__':
     tolerance = 9999999999
     accepted_tolerance = 0.1
     fit(data)
-    predict(test_path)
+    #predict(test_path)
 
 
 
